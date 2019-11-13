@@ -20,7 +20,6 @@ pip install -r requirements.txt
 ```
 username=Ваш логин
 password=Ваш пароль
-
 ```
 ### Запуск
 
