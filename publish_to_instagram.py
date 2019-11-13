@@ -24,7 +24,6 @@ def using_pillow_for_image_resize(IMAGE_DIRECTORY,PROCESSED_IMAGES):
                    image=Image.open(os.path.join(IMAGE_DIRECTORY,filename))
                    resized_image=image.resize((1080,1080))
                    resized_image.save((os.path.join(PROCESSED_IMAGES,filename)))
-                   print(image.size)
                 except os.error as e:
                     print(e)
 
