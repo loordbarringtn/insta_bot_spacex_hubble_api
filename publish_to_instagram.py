@@ -5,8 +5,8 @@ from dotenv import load_dotenv
 from PIL import Image
 
 from fetch_spacex import fetch_spacex_last_launch
-from fetch_hubble import hubble_collections_instant_download
-from insta_bot import instabot
+from fetch_hubble import download_hubble_collections
+from insta_bot import insta_bot
 
 SPACEX_URL = "https://api.spacexdata.com/v3/launches/latest"
 PROCESSED_IMAGES='processed_images/'
@@ -15,11 +15,7 @@ IMAGE_DIRECTORY= 'images/'
 
 
 def using_pillow_for_image_resize(IMAGE_DIRECTORY,PROCESSED_IMAGES):
-    try:
-        if not os.path.exists(PROCESSED_IMAGES):
-            os.mkdir(PROCESSED_IMAGES)
-    except OSError:
-        print("Creation of the directory %s failed")
+    os.makedirs(IMAGE_DIRECTORY,exist_ok=True)
     for filename in os.listdir(IMAGE_DIRECTORY):
             if not (filename.endswith('.png') or filename.endswith('.jpg') or filename.endswith('.tif')):
                 print("No image file inside this directory")
@@ -34,7 +30,7 @@ def using_pillow_for_image_resize(IMAGE_DIRECTORY,PROCESSED_IMAGES):
 
 def main():
     fetch_spacex_last_launch(SPACEX_URL)
-    hubble_collections_instant_download(IMAGE_COLLECTION,IMAGE_DIRECTORY)
+    download_hubble_collections(IMAGE_COLLECTION,IMAGE_DIRECTORY)
     using_pillow_for_image_resize(IMAGE_DIRECTORY, PROCESSED_IMAGES)
     insta_bot()
 
