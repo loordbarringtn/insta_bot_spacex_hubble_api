@@ -6,6 +6,8 @@
 * __fetch_hubble.py__ - скачивает фотографии, сделанные телескопом __Hubble__.
 * __upload_images.py__ - загружает скаченные фотографии в аккаунт __Instagram__.
 
+Для загрузки фотографий используются открытые API [SpaceX](https://github.com/r-spacex/SpaceX-API) и [Hubble](http://hubblesite.org/api/documentation).
+
 ## Как запустить
 
 Python3 должен быть уже установлен.
@@ -13,18 +15,21 @@ Python3 должен быть уже установлен.
 ```
 pip install -r requirements.txt
 ```
-
-Для загрузки фотографий используются открытые API [SpaceX](https://github.com/r-spacex/SpaceX-API) и [Hubble](http://hubblesite.org/api/documentation).
-
-Фотографии сначала скачиваются в папку `images`. Далее происходит ресайз картинок и обработанные файлы сохраняются
-в папку `processed_images`. 
-
 Для загрузки фотографий в Instagram зарегистрируйте аккаунт, создайте в папке проекта файл `.env` и 
 запишите в него логин и пароль:
 ```
 username=Ваш логин
 password=Ваш пароль
+
 ```
+### Запуск
+
+
+Фотографии сначала скачиваются в папку `images`. Далее происходит ресайз картинок и обработанные файлы сохраняются
+в папку `processed_images`. 
+
+
+
 Запустите
 
 ```
