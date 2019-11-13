@@ -4,7 +4,7 @@ import os
 from dotenv import load_dotenv
 PROCESSED_IMAGES='processed_images/'
 
-def instabot():
+def insta_bot():
     load_dotenv()
     bot = Bot()
     instagram_username= os.getenv("username")
@@ -14,7 +14,6 @@ def instabot():
     for file in files:
         caption=file.split('.')[0]
         bot.upload_photo(os.path.join(PROCESSED_IMAGES,file),caption=caption)
-        time.sleep(timeout)
 
 if __name__ == '__main__':
-    instabot()
+    insta_bot()
