@@ -3,9 +3,10 @@ import os
 
 IMAGE_COLLECTION='spacecraft'
 IMAGE_DIRECTORY= 'images/'
+IMAGE_ID=1
 
-def getting_image_url_from_image_id(image_id):
-    response = requests.get(f'http://hubblesite.org/api/v3/image/{image_id}', verify=False)
+def getting_image_url_from_IMAGE_ID(IMAGE_ID):
+    response = requests.get(f'http://hubblesite.org/api/v3/image/{IMAGE_ID}', verify=False)
     response.raise_for_status()
     data = response.json()
     data_from_dictionary = data["image_files"]
@@ -13,14 +14,10 @@ def getting_image_url_from_image_id(image_id):
     image_url=specific_photo['file_url']
     return image_url
 
-def getting_file_extension(image_id):
-    extension_from_url_name =getting_image_url_from_image_id(image_id).split('.')[-1]
-    return extension_from_url_name
-
-def save_hubble_images(image_id,IMAGE_DIRECTORY):
+def save_hubble_images(IMAGE_ID,IMAGE_DIRECTORY):
     os.makedirs(IMAGE_DIRECTORY,exist_ok=True)
-    image_full_web_adress = '{}'.format('https:') + getting_image_url_from_image_id(image_id)
-    file_name = '{}{}{}'.format('hubble', image_id, '.') + getting_file_extension(image_id)
+    image_full_web_adress = '{}'.format('https:') + getting_image_url_from_IMAGE_ID(IMAGE_ID)
+    file_name = '{}{}{}'.format('hubble', IMAGE_ID, '.') + getting_image_url_from_IMAGE_ID(IMAGE_ID).split('.')[-1]
     complete_filename = os.path.join(IMAGE_DIRECTORY, file_name)
     response = requests.get(image_full_web_adress, verify=False)
     response.raise_for_status()
@@ -34,7 +31,7 @@ def download_hubble_collections(IMAGE_COLLECTION,IMAGE_DIRECTORY):
     response.raise_for_status()
     response_data = response.json()
     for spaceship in (response_data):
-          image_full_web_adress = 'https:' + getting_image_url_from_image_id(spaceship['id'])
+          image_full_web_adress = 'https:' + getting_image_url_from_IMAGE_ID(spaceship['id'])
           file_name = image_full_web_adress.split("/")[-1]
           complete_filename = os.path.join(IMAGE_DIRECTORY, file_name)
           response = requests.get(image_full_web_adress, verify=False)
