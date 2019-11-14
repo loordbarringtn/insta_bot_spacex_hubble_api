@@ -19,8 +19,8 @@ def fetch_spacex_last_launch(SPACEX_URL):
     response.raise_for_status()
     data=response.json()
     photo_filename=data['links']['flickr_images']
-    for i,b in enumerate (photo_filename):
-        spacex_save_file(b,IMAGE_DIRECTORY)
+    for photo in photo_filename:
+        spacex_save_file(photo,IMAGE_DIRECTORY)
 
 if __name__ == '__main__':
     try:
@@ -31,3 +31,4 @@ if __name__ == '__main__':
       print("OS error: {0}".format(error))
     except IOError as e:
       print("I/O error({0}): {1}".format(e.errno, e.strerror))
+
