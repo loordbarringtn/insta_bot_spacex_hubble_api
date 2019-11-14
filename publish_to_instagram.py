@@ -13,25 +13,21 @@ PROCESSED_IMAGES='processed_images/'
 IMAGE_COLLECTION='spacecraft'
 IMAGE_DIRECTORY= 'images/'
 
-
-def using_pillow_for_image_resize(IMAGE_DIRECTORY,PROCESSED_IMAGES):
+def use_pillow_for_image_resize(IMAGE_DIRECTORY,PROCESSED_IMAGES):
     os.makedirs(IMAGE_DIRECTORY,exist_ok=True)
     for filename in os.listdir(IMAGE_DIRECTORY):
-            if not (filename.endswith('.png') or filename.endswith('.jpg') or filename.endswith('.tif')):
-                print("No image file inside this directory")
-            else:
-                try:
+            if (filename.endswith('.png') or filename.endswith('.jpg') or filename.endswith('.tif')):
                    image=Image.open(os.path.join(IMAGE_DIRECTORY,filename))
                    resized_image=image.resize((1080,1080))
                    resized_image.save((os.path.join(PROCESSED_IMAGES,filename)))
-                except os.error as e:
-                    print(e)
+            else:
+                return None
 
 def main():
     fetch_spacex_last_launch(SPACEX_URL)
     download_hubble_collections(IMAGE_COLLECTION,IMAGE_DIRECTORY)
-    using_pillow_for_image_resize(IMAGE_DIRECTORY, PROCESSED_IMAGES)
-    insta_bot()
+    use_pillow_for_image_resize(IMAGE_DIRECTORY, PROCESSED_IMAGES)
+    insta_bot(PROCESSED_IMAGES)
 
 if __name__ == '__main__':
     main()
